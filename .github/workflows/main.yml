@@ -23,7 +23,7 @@ jobs:
         uses: Klemensas/action-autotag@stable
         id: tagger
         with:
-          GITHUB_TOKEN: ${{ secrets.TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
         run: npm run tauri build
       - name: Release
