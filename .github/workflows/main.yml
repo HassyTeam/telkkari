@@ -10,19 +10,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install tauri
-      - run: npm install 
-      - run: npm run tauri build
+      - name: Install Tauri
+        run: npm install tauri
+      - name: Install other dependencies
+        run: npm install
       - name: Bump package version
         id: bumping-version
         uses: jpb06/bump-package@latest
         with:
           should-default-to-patch: true
-      - uses: Klemensas/action-autotag@stable
+      - name: Tag things :3
+        uses: Klemensas/action-autotag@stable
         id: tagger
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN}}
-      - uses: svenstaro/upload-release-action@2.9.0
+      - name: Build
+        run: npm run tauri build
+      - name: Release
+        uses: svenstaro/upload-release-action@2.9.0
         with:
           file: /src-tauri/target/release/bundle/msi/*
           release_name: Nightly Build (v.${{ steps.tagger.outputs.version }})
