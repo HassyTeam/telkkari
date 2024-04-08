@@ -1,0 +1,29 @@
+name: Tauri builder
+on:
+  push:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Install dependencies
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build
+      - run: npm install tauri
+      - run: npm install 
+      - run: npm run tauri build
+      - name: Make new tag
+      - uses: phish108/autotag-action@v1.1.55
+        id: tagger
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN}}
+      - name: Make a new release and use the build
+      - uses: svenstaro/upload-release-action@2.9.0
+        with:
+          file: /src-tauri/target/release/bundle/msi/*
+          release_name: Nightly Build (v.${{ steps.tagger.outputs.new-tag }})
+          prerelease: true
+          make_latest: false
