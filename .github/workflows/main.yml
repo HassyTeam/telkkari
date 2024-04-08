@@ -13,13 +13,18 @@ jobs:
       - run: npm install tauri
       - run: npm install 
       - run: npm run tauri build
-      - uses: phish108/autotag-action@v1.1.55
+      - name: Bump package version
+        id: bumping-version
+        uses: jpb06/bump-package@latest
+        with:
+          should-default-to-patch: true
+      - uses: Klemensas/action-autotag@stable
         id: tagger
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
       - uses: svenstaro/upload-release-action@2.9.0
         with:
           file: /src-tauri/target/release/bundle/msi/*
-          release_name: Nightly Build (v.${{ steps.tagger.outputs.new-tag }})
+          release_name: Nightly Build (v.${{ steps.tagger.outputs.version }})
           prerelease: true
           make_latest: false
