@@ -1,6 +1,6 @@
 name: Tauri builder
 on:
-  push:
+  push
 
 jobs:
   build-windows:
