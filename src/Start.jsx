@@ -8,7 +8,7 @@ var stream = null;
 
 export default function Start() {
 
-    var [stream, setStream] = React.useState("https://yletv.akamaized.net/hls/live/622365/yletv1fin/index.m3u8")
+    var [stream, setStream] = useState("https://yletv.akamaized.net/hls/live/622365/yletv1fin/index.m3u8")
 
     return (
         <div className='player-wrapper'>

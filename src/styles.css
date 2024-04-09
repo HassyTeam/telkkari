@@ -11,6 +11,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+  margin: 0
+}
+
 .container {
   margin: 0;
   padding-top: 10vh;
@@ -97,19 +101,17 @@ button:active {
   background-color: #0f0f0f69;  
 }
 
-body {
-  margin: 0
-}
-
 html, body {
   overflow: hidden;
 }
 
-.sidebar{
-  width: 45vh;
-  height:100vh;
-  background: rgb(49, 48, 48);
-  /* border-radius: 15px; */
+.sidebar {
+  width: 35rem;
+  height: 100vh;
+  padding: 2rem;
+  background: rgba(49, 48, 48, 0.9);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .react-player {
