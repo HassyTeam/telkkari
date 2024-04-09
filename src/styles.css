@@ -104,3 +104,15 @@ body {
 html, body {
   overflow: hidden;
 }
+
+.sidebar{
+  width: 45vh;
+  height:100vh;
+  background: rgb(49, 48, 48);
+  /* border-radius: 15px; */
+}
+
+.react-player {
+  position: absolute;
+  z-index: -1
+}

@@ -17,6 +17,7 @@ export default function Start() {
             <SimpleButton label="test 2" onClick={() => setStream(stream="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8")} /> */}
             <Log props={stream} />
             <ReactPlayer className="react-player" width="100%" height="100vh" muted={false} playing={true} url={stream}/>
+            <SideBar videos={1} />
         </div>
     )
 }
@@ -24,6 +25,22 @@ export default function Start() {
 function SimpleButton(props) {
     return (
         <button onClick={props.onClick}>{props.label}</button>
+    )
+}
+
+function SideBar({videos}) {
+
+    var heading = null
+
+    if (videos > 0) {
+        const noun = videos > 1 ? 'Channels' : 'Channel';
+        heading = videos + ' ' + noun;
+      }
+    return (
+        <div className='sidebar'>
+            <h2>{heading}</h2>
+            
+        </div>
     )
 }
 
