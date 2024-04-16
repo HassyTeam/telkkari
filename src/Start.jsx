@@ -1,8 +1,11 @@
 import { appWindow } from '@tauri-apps/api/window';
 import ReactPlayer from 'react-player'
 import React, { useState } from 'react';
+import json from "./confs/playlists.json"
 
 var stream = null;
+var sidebar_playlists = []
+var json_playlists = json
 
 {/* test source --> "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" */}
 
@@ -17,7 +20,7 @@ export default function Start() {
             <SimpleButton label="test 2" onClick={() => setStream(stream="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8")} /> */}
             <Log props={stream} />
             <ReactPlayer className="react-player" width="100%" height="100vh" muted={false} playing={true} url={stream}/>
-            <SideBar videos={1} />
+            <Sidebar playlists={json_playlists} />
         </div>
     )
 }
@@ -28,20 +31,30 @@ function SimpleButton(props) {
     )
 }
 
-function SideBar({videos}) {
-
-    var heading = null
-
-    if (videos > 0) {
-        const noun = videos > 1 ? 'Channels' : 'Channel';
-        heading = videos + ' ' + noun;
-      }
+function Sidebar({ playlists }) {
+    for (var prop in playlists) {
+        //console.log("Prop: " + prop)
+        //console.log("Key:" + prop);
+        var id = prop
+        var name = playlists[prop]["name"]
+        var propstream = playlists[prop]["stream"]
+        //console.log(propstream)
+        //console.log("Value:" + value);
+    }
     return (
-        <div className='sidebar'>
-            <h2>{heading}</h2>
-            
-        </div>
-    )
+      <section className='sidebar'>
+        {/* Not working yet, expected behaviour */}
+        {channels.map(channel =>
+          <NewChannel channel={value} />
+        )}
+      </section>
+    );
+}
+
+function NewChannel({ props }) {
+return (
+    <p>{props.id}</p>
+);
 }
 
 function Log(props) {
